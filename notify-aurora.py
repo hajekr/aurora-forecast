@@ -30,7 +30,7 @@ def get_aurora_forecast():
     return "Kp for 3hr blocks UTC time.\n" + "\n".join(kp_days)
 
 
-def get_map_share_url(text):
+def extract_map_share_url(text):
     urls = URLExtract().find_urls(text)
 
     for url in urls:
@@ -39,24 +39,26 @@ def get_map_share_url(text):
             return url
 
 
-def notify_map_share(garmin_url):
-    soup = BeautifulSoup(requests.get(garmin_url).content, 'html.parser')
+def create_map_share_payload(url):
+    soup = BeautifulSoup(requests.get(url).content, 'html.parser')
     message_id = soup.find("input", {"id": "MessageId"}).get('value')
     guid = soup.find("input", {"id": "Guid"}).get('value')
     reply_address = soup.find("input", {"id": "ReplyAddress"}).get('value')
 
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    payload = {'ReplyAddress': reply_address,
-               'ReplyMessage': get_aurora_forecast(),
-               'MessageId': message_id,
-               'Guid': guid}
+    return {'ReplyAddress': reply_address,
+            'ReplyMessage': get_aurora_forecast(),
+            'MessageId': message_id,
+            'Guid': guid}
 
+
+def notify_map_share(url):
+    payload = create_map_share_payload(url)
     logging.info(payload)
 
     session = requests.Session()
     response = session.post(
         'https://eur.explore.garmin.com/TextMessage/TxtMsg',
-        headers=headers,
+        headers={'User-Agent': 'Mozilla/5.0'},
         data=payload)
 
     logging.info(response.headers)
@@ -65,5 +67,5 @@ def notify_map_share(garmin_url):
 
 with MailBox(os.environ['IMAP_URL']).login(os.environ['IMAP_LOGIN'], os.environ['IMAP_PASSWORD'], 'INBOX') as mailbox:
     for msg in mailbox.fetch(AND(from_=os.environ['IMAP_FROM'], new=True)):
-        map_share_url = get_map_share_url(msg.text)
+        map_share_url = extract_map_share_url(msg.text)
         notify_map_share(map_share_url)
