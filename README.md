@@ -16,7 +16,9 @@ Kp for 3hr blocks UTC time.
 14/03: 56444334
 ```
 
-Data is sourced from [NOAA Geomagnetic Activity Observation and Forecast](https://services.swpc.noaa.gov/text/3-day-forecast.txt)
+Service is provided for free, since it only uses free tier services and open data source.
+
+Data is sourced from [NOAA Geomagnetic Activity Observation and Forecast](https://services.swpc.noaa.gov/text/3-day-forecast.txt).
 
 As you can see in source report, each number represents forecast for 3-hour window, e.g. 00-03, 03-06, etc.
 Time is in UTC, so you'll need to recalculate for your position.
@@ -50,3 +52,9 @@ If using the script as-is, you'll need to provide following environment variable
 - `IMAP_LOGIN` - login for IMAP (usually your email address)
 - `IMAP_PASSWORD` - password for IMAP (usually your email password)
 
+## How to improve
+Do you have any questions?
+
+Do you have any ideas for improvement?
+
+Feel free to [leave a comment](https://github.com/hajekr/aurora-forecast/issues/new) or open a pull request in [GitHub repo](https://github.com/hajekr/aurora-forecast).
