@@ -6,7 +6,7 @@ Know a chance of northern lights observation even in remote places.
 ![Aurora observed in Urho Kekkonen NP](img/aurora-ukk.jpg)
 
 ## How to use for free
-From Garmin inReach device, send an email message with arbitrary text to `auroraforecast@seznam.cz` recipient.
+From Garmin inReach device, send an **email with an arbitrary text** to `auroraforecast@seznam.cz` recipient.
 
 Within 10 minutes, you will get message with Kp index forecast.
 ```
@@ -40,9 +40,10 @@ Every email is replied once, but you can request multiple forecasts per day.
 
 ## How to run own service
 You may consider information provided in inReach message as sensitive.
-It contains your location and provides link with reply form which can be misused for spamming - and spam delivered via satellite may be very expensive.
+It contains your location and provides link with reply form which can be misused.
 
-You can simply run your own service. Just send inReach message to your own email inbox and schedule provided `notify-aurora.py` script to check for inReach emails and reply to them.
+If you prefer to keep messages in own mailbox, you can simply run your own service.
+Just send inReach message to your own email and schedule provided `notify-aurora.py` script to check for inReach emails and reply to them.
 
 Script can be deployed and scheduled for free with [Heroku](https://www.heroku.com).
 As an email, you can use any free mail service providing IMAP access.
