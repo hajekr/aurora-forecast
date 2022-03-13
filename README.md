@@ -6,7 +6,7 @@ Know a chance of northern lights observation even in remote places.
 ![Aurora observed in Urho Kekkonen NP](img/aurora-ukk.jpg)
 
 ## How to use for free
-From Garmin inReach device, send an email message with arbitrary text to `auroraforecast@seznam.cz` recipient.
+From Garmin inReach device, send an email message with arbitrary text to `auroraforecast@seznam.cz`.
 
 Within 10 minutes, you will get message with Kp index forecast.
 ```
