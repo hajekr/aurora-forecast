@@ -21,7 +21,8 @@ def get_aurora_forecast():
         (date.today() + timedelta(days=2)).strftime("%d/%m") + ': ']
 
     for kp_line in kp_lines:
-        kp_numbers = re.findall(' [1-9] ', kp_line)
+        logging.info(kp_line)
+        kp_numbers = re.findall(' [0-9] ', kp_line)
         kp_days[0] += kp_numbers[0].strip()
         kp_days[1] += kp_numbers[1].strip()
         kp_days[2] += kp_numbers[2].strip()
@@ -39,20 +40,20 @@ def extract_map_share_url(text):
             return url
 
 
-def create_map_share_payload(url):
+def create_map_share_payload(url, text):
     soup = BeautifulSoup(requests.get(url).content, 'html.parser')
     message_id = soup.find("input", {"id": "MessageId"}).get('value')
     guid = soup.find("input", {"id": "Guid"}).get('value')
     reply_address = soup.find("input", {"id": "ReplyAddress"}).get('value')
 
     return {'ReplyAddress': reply_address,
-            'ReplyMessage': get_aurora_forecast(),
+            'ReplyMessage': text,
             'MessageId': message_id,
             'Guid': guid}
 
 
-def notify_map_share(url):
-    payload = create_map_share_payload(url)
+def notify_map_share(url, text):
+    payload = create_map_share_payload(url, text)
     logging.info(payload)
 
     session = requests.Session()
@@ -65,6 +66,8 @@ def notify_map_share(url):
 
 
 with MailBox(os.getenv('IMAP_URL')).login(os.getenv('IMAP_LOGIN'), os.getenv('IMAP_PASSWORD'), 'INBOX') as mailbox:
+    forecast_text = get_aurora_forecast()
+
     for msg in mailbox.fetch(AND(from_=os.getenv('IMAP_FROM', 'no.reply.inreach@garmin.com'), new=True)):
         map_share_url = extract_map_share_url(msg.text)
-        notify_map_share(map_share_url)
+        notify_map_share(map_share_url, forecast_text)
