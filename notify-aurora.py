@@ -62,10 +62,9 @@ def notify_map_share(url):
         data=payload)
 
     logging.info(response.headers)
-    logging.info(response.text)
 
 
-with MailBox(os.environ['IMAP_URL']).login(os.environ['IMAP_LOGIN'], os.environ['IMAP_PASSWORD'], 'INBOX') as mailbox:
-    for msg in mailbox.fetch(AND(from_=os.environ['IMAP_FROM'], new=True)):
+with MailBox(os.getenv('IMAP_URL')).login(os.getenv('IMAP_LOGIN'), os.getenv('IMAP_PASSWORD'), 'INBOX') as mailbox:
+    for msg in mailbox.fetch(AND(from_=os.getenv('IMAP_FROM', 'no.reply.inreach@garmin.com'), new=True)):
         map_share_url = extract_map_share_url(msg.text)
         notify_map_share(map_share_url)
