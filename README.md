@@ -16,8 +16,6 @@ Kp for 3hr blocks UTC time.
 14/03: 56444334
 ```
 
-Service is provided for free, since it only uses free tier services and open data source.
-
 Data is sourced from [NOAA Geomagnetic Activity Observation and Forecast](https://services.swpc.noaa.gov/text/3-day-forecast.txt).
 
 As you can see in source report, each number represents forecast for 3-hour window, e.g. 00-03, 03-06, etc.
@@ -27,6 +25,10 @@ For example Finland is 2 hours ahead of UTC, so first number represents 02-05 wi
 If you want to save fees for outgoing message, you can add email above as a recipient of a preset message.
 I usually need only 2 preset messages - to notify start and end of the hike, so third one can be reserved to get aurora forecast if weather conditions are favorable that night.
 For incoming message, 1 text message is spent from your inReach credit.
+
+Service is provided for free, since it only uses free tier services and open data source.
+
+I provide no guarantee, should there be any issue with the service, [please report](https://github.com/hajekr/aurora-forecast/issues/new).
 
 ## How it works
 Message from inReach device is delivered to email with accompanying information about position and link to Garmin map, which allows reply to the message.
