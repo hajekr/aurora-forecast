@@ -1,9 +1,9 @@
 import logging
 import os
 import re
-from datetime import date, timedelta
-
 import requests
+
+from datetime import date, timedelta
 from bs4 import BeautifulSoup
 from imap_tools import MailBox, AND
 from urlextract import URLExtract
