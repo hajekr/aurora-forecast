@@ -6,5 +6,5 @@ services:
     restart: always
     environment:
       IMAP_URL: ${IMAP_URL:-***}
-      IMAP_LOGIN: ${SLACK_TOKEN:-***}
-      IMAP_PASSWORD: ${SLACK_CHANNEL_ID:-***}
+      IMAP_LOGIN: ${IMAP_LOGIN:-***}
+      IMAP_PASSWORD: ${IMAP_PASSWORD:-***}
