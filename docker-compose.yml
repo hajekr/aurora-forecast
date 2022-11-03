@@ -1,0 +1,10 @@
+version: '3.1'
+
+services:
+  app:
+    image: romanhajek/aurora-forecast:latest
+    restart: always
+    environment:
+      IMAP_URL: ${IMAP_URL:-***}
+      IMAP_LOGIN: ${SLACK_TOKEN:-***}
+      IMAP_PASSWORD: ${SLACK_CHANNEL_ID:-***}

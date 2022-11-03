@@ -1,0 +1,2 @@
+* * * * * cd /src && /usr/local/bin/python3 notify-aurora.py >> cron.log 2>&1
+# Empty line
