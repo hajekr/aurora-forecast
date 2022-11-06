@@ -3,13 +3,14 @@ import os
 import sys
 import re
 import requests
+import json
 
 from datetime import date, timedelta
 from bs4 import BeautifulSoup
 from imap_tools import MailBox, AND
 from urlextract import URLExtract
 
-logging.basicConfig(stream=sys.stdout, format='{"log": "%(levelname)s:%(message)s"}', level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, format='{"message": "%(message)s"}', level=logging.INFO)
 
 
 def get_aurora_forecast():
@@ -55,7 +56,7 @@ def create_map_share_payload(url, text):
 
 def notify_map_share(url, text):
     payload = create_map_share_payload(url, text)
-    logging.info(payload)
+    logging.info(json.dumps(payload))
 
     session = requests.Session()
     response = session.post(
