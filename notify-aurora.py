@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 from imap_tools import MailBox, AND
 from urlextract import URLExtract
 
-logging.basicConfig(stream=sys.stdout, format='%(levelname)s:%(message)s', level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, format='{"log": "%(levelname)s:%(message)s"}', level=logging.INFO)
 
 
 def get_aurora_forecast():
