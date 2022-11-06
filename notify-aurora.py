@@ -21,7 +21,7 @@ def get_aurora_forecast():
         (date.today() + timedelta(days=2)).strftime("%d/%m") + ': ']
 
     for kp_line in kp_lines:
-        logging.info(kp_line)
+        logging.info("[" + kp_line + "]")
         kp_numbers = re.findall(' [0-9] ', kp_line)
         kp_days[0] += kp_numbers[0].strip()
         kp_days[1] += kp_numbers[1].strip()
