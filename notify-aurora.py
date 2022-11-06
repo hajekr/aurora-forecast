@@ -56,7 +56,7 @@ def create_map_share_payload(url, text):
 
 def notify_map_share(url, text):
     payload = create_map_share_payload(url, text)
-    logging.info(json.dumps(payload))
+    logging.debug(payload)
 
     session = requests.Session()
     response = session.post(
