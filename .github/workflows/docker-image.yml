@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Login to GitLab Container Registry
+      - name: Login to Docker Registry
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_LOGIN }}
