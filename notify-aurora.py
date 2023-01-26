@@ -24,13 +24,19 @@ def get_aurora_forecast():
 
     for kp_line in kp_lines:
         logging.info(kp_line)
-        kp_numbers = re.findall(' [0-9] ', kp_line)
-        kp_days[0] += kp_numbers[0].strip()
-        kp_days[1] += kp_numbers[1].strip()
-        kp_days[2] += kp_numbers[2].strip()
+        kp_numbers = re.findall(' [0-9.]+ ', kp_line)
+        kp_days[0] += round_kp(kp_numbers[0]) + " "
+        kp_days[1] += round_kp(kp_numbers[1]) + " "
+        kp_days[2] += round_kp(kp_numbers[2]) + " "
 
-    logging.info(kp_days)
-    return "Kp for 3hr blocks UTC time.\n" + "\n".join(kp_days)
+    kp_days_stripped = [item.strip() for item in kp_days]
+
+    logging.info(kp_days_stripped)
+    return "Kp for 3hr blocks UTC time.\n" + "\n".join(kp_days_stripped)
+
+
+def round_kp(kp_index):
+    return str(round(float(kp_index.strip()), 1))
 
 
 def extract_map_share_url(text):
