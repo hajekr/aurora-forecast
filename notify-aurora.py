@@ -1,11 +1,10 @@
 import logging
 import os
-import sys
 import re
-import requests
-import json
-
+import sys
 from datetime import date, timedelta
+
+import requests
 from bs4 import BeautifulSoup
 from imap_tools import MailBox, AND
 from urlextract import URLExtract
@@ -46,6 +45,7 @@ def extract_map_share_url(text):
         if re.search("txtmsg", url):
             logging.info('sending via ' + url)
             return url
+    return None
 
 
 def create_map_share_payload(url, text):
